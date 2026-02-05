@@ -5,17 +5,20 @@ Complete full stack application with Node.js backend and frontend.
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js (v14 or higher)
 - npm or yarn
 
 ### Installation
 
 1. Install all dependencies (backend dependencies are at root level):
+
 ```bash
 npm install
 ```
 
 2. If you have a separate frontend with its own package.json:
+
 ```bash
 cd Frontend
 npm install
@@ -23,6 +26,7 @@ cd ..
 ```
 
 3. Create a `.env` file from the example:
+
 ```bash
 cp .env.example .env
 ```
@@ -32,20 +36,25 @@ cp .env.example .env
 ### Running the Application
 
 **Backend Development mode (with auto-reload):**
+
 ```bash
 npm run dev
 ```
+
 or
+
 ```bash
 npm run dev:backend
 ```
 
 **Backend Production mode:**
+
 ```bash
 npm start
 ```
 
 **Frontend (if separate):**
+
 ```bash
 npm run dev:frontend
 ```
@@ -74,14 +83,17 @@ Wellbeingorganic/
 ## 🔌 API Endpoints
 
 ### Health Check
+
 - `GET /api/health` - Check API health status
 
 ### Base URL
+
 - `GET /` - API information
 
 ## 🛠️ Technologies Used
 
 ### Backend
+
 - **Express.js** - Web framework
 - **CORS** - Cross-origin resource sharing
 - **Helmet** - Security middleware
@@ -102,3 +114,6 @@ Wellbeingorganic/
 
 ISC
 
+# wellbeing_organic
+
+skin care product
