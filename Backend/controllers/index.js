@@ -1,8 +1,8 @@
 // Controllers for handling business logic
 // Add your controller functions here
 
-// Example controller:
-// exports.getExample = async (req, res) => {
+// Example controller (ESM):
+// export const getExample = async (req, res) => {
 //   try {
 //     // Your logic here
 //     res.json({
@@ -17,5 +17,8 @@
 //   }
 // };
 
-module.exports = {};
+const controllers = {};
 
+export default controllers;
+
+ 

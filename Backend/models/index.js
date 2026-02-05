@@ -1,8 +1,8 @@
 // Data models
 // Add your models here (Mongoose schemas, Sequelize models, etc.)
 
-// Example Mongoose model:
-// const mongoose = require('mongoose');
+// Example Mongoose model (ESM):
+// import mongoose from 'mongoose';
 // 
 // const exampleSchema = new mongoose.Schema({
 //   name: {
@@ -14,7 +14,10 @@
 //   timestamps: true
 // });
 // 
-// module.exports = mongoose.model('Example', exampleSchema);
+// export default mongoose.model('Example', exampleSchema);
 
-module.exports = {};
+const models = {};
 
+export default models;
+
+ 
