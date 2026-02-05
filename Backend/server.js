@@ -1,9 +1,12 @@
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const path = require('path');
-require('dotenv').config();
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+import helmet from 'helmet';
+import dotenv from 'dotenv';
+
+import apiRoutes from './routes/index.js';
+
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -25,7 +28,7 @@ app.get('/', (req, res) => {
 });
 
 // API Routes
-app.use('/api', require('./routes'));
+app.use('/api', apiRoutes);
 
 // 404 Handler
 app.use((req, res) => {
@@ -47,9 +50,10 @@ app.use((err, req, res, next) => {
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
-module.exports = app;
+export default app;
 
+ 

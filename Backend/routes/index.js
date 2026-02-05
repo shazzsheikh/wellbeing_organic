@@ -1,4 +1,5 @@
-const express = require('express');
+import express from 'express';
+
 const router = express.Router();
 
 // Health check route
@@ -14,5 +15,6 @@ router.get('/health', (req, res) => {
 // router.get('/example', exampleController.getExample);
 // router.post('/example', exampleController.createExample);
 
-module.exports = router;
+export default router;
 
+ 

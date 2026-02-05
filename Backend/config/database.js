@@ -1,8 +1,8 @@
 // Database configuration file
 // Update this when you add a database
 
-// Example for MongoDB with Mongoose:
-// const mongoose = require('mongoose');
+// Example for MongoDB with Mongoose (ESM):
+// import mongoose from 'mongoose';
 // 
 // const connectDB = async () => {
 //   try {
@@ -19,8 +19,9 @@
 // 
 // module.exports = connectDB;
 
-// Example for PostgreSQL with pg:
-// const { Pool } = require('pg');
+// Example for PostgreSQL with pg (ESM):
+// import pkg from 'pg';
+// const { Pool } = pkg;
 // 
 // const pool = new Pool({
 //   host: process.env.DB_HOST,
@@ -30,7 +31,10 @@
 //   password: process.env.DB_PASSWORD,
 // });
 // 
-// module.exports = pool;
+// export default pool;
 
-module.exports = {};
+const database = {};
 
+export default database;
+
+ 

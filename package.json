@@ -2,6 +2,7 @@
   "name": "wellbeingorganic",
   "version": "1.0.0",
   "description": "Wellbeing Organic - Full Stack Application",
+  "type": "module",
   "main": "Backend/server.js",
   "scripts": {
     "start": "node Backend/server.js",
@@ -31,3 +32,4 @@
   }
 }
 
+ 
