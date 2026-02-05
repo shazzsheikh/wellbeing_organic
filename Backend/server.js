@@ -4,12 +4,10 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 
-import apiRoutes from './routes/index.js';
-
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(helmet()); // Security headers
@@ -19,16 +17,13 @@ app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
 
 // Routes
-app.get('/', (req, res) => {
+app.get('/testapi', (req, res) => {
   res.json({
     message: 'Wellbeing Organic API',
     version: '1.0.0',
     status: 'running'
   });
 });
-
-// API Routes
-app.use('/api', apiRoutes);
 
 // 404 Handler
 app.use((req, res) => {
@@ -55,5 +50,3 @@ app.listen(PORT, () => {
 });
 
 export default app;
-
- 
