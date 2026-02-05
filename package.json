@@ -1,0 +1,33 @@
+{
+  "name": "wellbeingorganic",
+  "version": "1.0.0",
+  "description": "Wellbeing Organic - Full Stack Application",
+  "main": "Backend/server.js",
+  "scripts": {
+    "start": "node Backend/server.js",
+    "dev": "nodemon Backend/server.js",
+    "dev:backend": "nodemon Backend/server.js",
+    "dev:frontend": "cd Frontend && npm start",
+    "install:all": "npm install && cd Frontend && npm install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wellbeing",
+    "organic",
+    "fullstack"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.3.1",
+    "cors": "^2.8.5",
+    "morgan": "^1.10.0",
+    "helmet": "^7.1.0",
+    "express-validator": "^7.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
+
