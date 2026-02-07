@@ -6,12 +6,18 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
-  Platform
+  Platform,
 } from 'react-native';
+
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const Dashboard = () => {
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+      
       {/* Header */}
       <View style={styles.header}>
         <Text style={styles.logo}>WELLBEINGORGANIC</Text>
@@ -26,7 +32,7 @@ const Dashboard = () => {
       <Text style={styles.title}>India's Most Trusted</Text>
       <Text style={styles.subtitle}>Health Supplement Brand</Text>
 
-      {/* Trust Badges */}
+      {/* Badges */}
       <View style={styles.badgeRow}>
         <Badge title="4L+" subtitle="Happy Customers" />
         <Badge title="US FDA" subtitle="Approved" />
@@ -34,13 +40,13 @@ const Dashboard = () => {
         <Badge title="FSSAI" subtitle="Certified" />
       </View>
 
-      {/* Best Seller */}
+      {/* Section */}
       <View style={styles.sectionHeader}>
         <Text style={styles.sectionTitle}>Best Seller</Text>
         <Text style={styles.viewAll}>View All</Text>
       </View>
-
-      {/* Product Cards */}
+ 
+      {/* Products */}
       <View style={styles.productRow}>
         <ProductCard
           title="Plant Protein + Veg Collagen"
@@ -99,63 +105,71 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    paddingHorizontal: 16,
+    paddingHorizontal: wp('4%'),
   },
 
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: Platform.OS === 'android' ? 30 : 0,
+    marginTop: Platform.OS === 'android' ? hp('4%') : hp('6%'),
   },
+
   logo: {
-    fontSize: 22,
+    fontSize: wp('5%'),
     fontWeight: '700',
   },
+
   headerIcons: {
     flexDirection: 'row',
-    gap: 14,
+    gap: wp('3%'),
   },
+
   icon: {
-    fontSize: 18,
+    fontSize: wp('4.5%'),
   },
 
   title: {
-    fontSize: 24,
+    fontSize: wp('6%'),
     fontWeight: '700',
     textAlign: 'center',
-    marginTop: 20,
+    marginTop: hp('2.5%'),
   },
+
   subtitle: {
-    fontSize: 16,
+    fontSize: wp('4%'),
     textAlign: 'center',
     color: '#555',
-    marginBottom: 20,
+    marginBottom: hp('2.5%'),
   },
 
   badgeRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 25,
+    marginBottom: hp('3%'),
   },
+
   badge: {
     alignItems: 'center',
-    width: '23%',
+    width: wp('22%'),
   },
+
   badgeCircle: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
+    width: wp('12%'),
+    height: wp('12%'),
+    borderRadius: wp('6%'),
     borderWidth: 1,
     borderColor: '#000',
-    marginBottom: 6,
+    marginBottom: hp('0.8%'),
   },
+
   badgeTitle: {
     fontWeight: '600',
-    fontSize: 13,
+    fontSize: wp('3.2%'),
   },
+
   badgeSubtitle: {
-    fontSize: 11,
+    fontSize: wp('2.7%'),
     color: '#666',
     textAlign: 'center',
   },
@@ -163,14 +177,16 @@ const styles = StyleSheet.create({
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 12,
+    marginBottom: hp('1.5%'),
   },
+
   sectionTitle: {
-    fontSize: 18,
+    fontSize: wp('4.5%'),
     fontWeight: '700',
   },
-  viewAll: {
-    fontSize: 14,
+
+  viewAll:{
+    fontSize: wp('3.5%'),
     textDecorationLine: 'underline',
     cursor: 'pointer'
   },
@@ -181,46 +197,57 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    width: '48%',
+    width: wp('44%'),
     backgroundColor: '#FFF7EE',
-    borderRadius: 12,
+    borderRadius: wp('3%'),
     overflow: 'hidden',
   },
+
   productImage: {
     width: '100%',
-    height: 150,
+    height: hp('20%'),
   },
+
   cardContent: {
-    padding: 10,
+    padding: wp('2.5%'),
   },
+
   category: {
-    fontSize: 12,
+    fontSize: wp('2.8%'),
     color: '#E48B2A',
-    marginBottom: 4,
+    marginBottom: hp('0.5%'),
   },
+
   productTitle: {
-    fontSize: 14,
+    fontSize: wp('3.5%'),
     fontWeight: '600',
-    marginBottom: 6,
+    marginBottom: hp('0.6%'),
   },
+
   ratingRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 4,
-    marginBottom: 6,
+    gap: wp('1%'),
+    marginBottom: hp('0.6%'),
   },
+
   star: {
     color: '#F5A623',
   },
+
   priceRow: {
     flexDirection: 'row',
-    gap: 8,
+    gap: wp('2%'),
   },
+
   price: {
     fontWeight: '700',
+    fontSize: wp('3.6%'),
   },
+
   oldPrice: {
     textDecorationLine: 'line-through',
     color: '#999',
+    fontSize: wp('3%'),
   },
 });
