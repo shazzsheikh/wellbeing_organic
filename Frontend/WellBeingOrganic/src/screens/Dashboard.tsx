@@ -16,18 +16,8 @@ import {
 
 const Dashboard = () => {
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      
-      {/* Header */}
-      <View style={styles.header}>
-        <Text style={styles.logo}>WELLBEINGORGANIC</Text>
-        <View style={styles.headerIcons}>
-          <Text style={styles.icon}>🔍</Text>
-          <Text style={styles.icon}>🤍</Text>
-          <Text style={styles.icon}>👜</Text>
-        </View>
-      </View>
-
+    <>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>    
       {/* Title */}
       <Text style={styles.title}>India's Most Trusted</Text>
       <Text style={styles.subtitle}>Health Supplement Brand</Text>
@@ -62,8 +52,23 @@ const Dashboard = () => {
           rating="4.5"
           image={{ uri: 'https://via.placeholder.com/300' }}
         />
+        <ProductCard
+          title="Plant Protein + Veg Collagen"
+          price="₹2494"
+          oldPrice="₹2895"
+          rating="4.5"
+          image={{ uri: 'https://via.placeholder.com/300' }}
+        />
+        <ProductCard
+          title="Skin: AcneClear - Powder"
+          price="₹1339"
+          oldPrice="₹1700"
+          rating="4.5"
+          image={{ uri: 'https://via.placeholder.com/300' }}
+        />
       </View>
     </ScrollView>
+    </>
   );
 };
 
@@ -107,33 +112,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingHorizontal: wp('4%'),
   },
-
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginTop: Platform.OS === 'android' ? hp('4%') : hp('6%'),
-  },
-
-  logo: {
-    fontSize: wp('5%'),
-    fontWeight: '700',
-  },
-
-  headerIcons: {
-    flexDirection: 'row',
-    gap: wp('3%'),
-  },
-
-  icon: {
-    fontSize: wp('4.5%'),
-  },
-
   title: {
     fontSize: wp('6%'),
     fontWeight: '700',
     textAlign: 'center',
-    marginTop: hp('2.5%'),
+    marginTop: hp('2%'),
   },
 
   subtitle: {
@@ -193,7 +176,9 @@ const styles = StyleSheet.create({
 
   productRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     justifyContent: 'space-between',
+    gap: wp('4%'),
   },
 
   card: {

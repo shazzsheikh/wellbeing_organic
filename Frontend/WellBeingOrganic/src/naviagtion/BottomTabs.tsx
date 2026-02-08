@@ -3,8 +3,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import dashboard from '../screens/Dashboard';
 import Shop from '../screens/Shop';
-import AISkin from '../screens/AiSkin';
 import Account from '../screens/Account';
+import { Platform } from 'react-native';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,16 +21,15 @@ const BottomTabs = () => {
         tabBarActiveTintColor: '#000',
         tabBarInactiveTintColor: '#999',
         tabBarStyle: {
-          height: 65,
-          paddingBottom: 8,
-          paddingTop: 8,
+          height: hp('7%'),
+          paddingBottom: Platform.OS === 'android' ? hp('1%') : hp('2%'),
+          paddingTop: Platform.OS === 'android' ? hp('0.5%') : hp('0.3%'),
         },
         tabBarIcon: ({ focused, color, size }) => {
           let iconName = 'home';
 
           if (route.name === 'Home') iconName = focused ? 'home' : 'home-outline';
           if (route.name === 'Shop') iconName = focused ? 'cart' : 'cart-outline';
-          if (route.name === 'AI Skin') iconName = focused ? 'star' : 'star-outline';
           if (route.name === 'Account') iconName = focused ? 'account' : 'account-outline';
 
           return <Icon name={iconName} size={22} color={color} />;
@@ -35,7 +38,6 @@ const BottomTabs = () => {
     >
       <Tab.Screen name="Home" component={dashboard} />
       <Tab.Screen name="Shop" component={Shop} />
-      <Tab.Screen name="AI Skin" component={AISkin} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
