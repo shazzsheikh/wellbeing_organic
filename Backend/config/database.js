@@ -1,40 +1,35 @@
-// Database configuration file
-// Update this when you add a database
+// Database configuration file (MongoDB + Mongoose)
+// 👉 Isko use karne ke liye .env me MONGODB_URI set karo:
+// MONGODB_URI=mongodb://localhost:27017/wellbeingorganic
 
-// Example for MongoDB with Mongoose (ESM):
-// import mongoose from 'mongoose';
-// 
-// const connectDB = async () => {
-//   try {
-//     const conn = await mongoose.connect(process.env.MONGODB_URI, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//     });
-//     console.log(`MongoDB Connected: ${conn.connection.host}`);
-//   } catch (error) {
-//     console.error(`Error: ${error.message}`);
-//     process.exit(1);
-//   }
-// };
-// 
-// module.exports = connectDB;
+import mongoose from 'mongoose';
 
-// Example for PostgreSQL with pg (ESM):
-// import pkg from 'pg';
-// const { Pool } = pkg;
-// 
-// const pool = new Pool({
-//   host: process.env.DB_HOST,
-//   port: process.env.DB_PORT,
-//   database: process.env.DB_NAME,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-// });
-// 
-// export default pool;
+export const connectDB = async () => {
+  try {
+    const uri = process.env.MONGODB_URI;
 
-const database = {};
+    if (!uri) {
+      console.warn(
+        'MONGODB_URI env variable set nahi hai. Database connect nahi hoga.'
+      );
+      return;
+    }
 
-export default database;
+    const conn = await mongoose.connect(uri, {
+      // latest mongoose versions me options optional hain,
+      // isliye yaha basic call rakha hai
+    });
+
+    console.log(`MongoDB connected: ${conn.connection.host}`);
+  } catch (error) {
+    console.error(`MongoDB connection error: ${error.message}`);
+    // Production me aap chahe to process.exit(1) bhi kar sakte ho
+    // abhi ke liye sirf log kar rahe hain
+  }
+};
+
+export default {
+  connectDB
+};
 
  

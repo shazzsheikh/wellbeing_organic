@@ -4,6 +4,8 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import dotenv from 'dotenv';
 
+import { connectDB } from './config/database.js';
+
 dotenv.config();
 
 const app = express();
@@ -43,10 +45,16 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-});
+// Start Server (pehle DB connect, phir server start)
+const startServer = async () => {
+  await connectDB();
 
-export default app;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  });
+};
+
+startServer();
+
+export default app; 
