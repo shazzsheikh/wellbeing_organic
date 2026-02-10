@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -13,61 +13,91 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import * as apis from '../apis/api';
 
 const Dashboard = () => {
+  const [products, setProducts] = useState<any>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchproducts = async () => {
+      try {
+        const response = await apis.products();
+        setProducts(response);
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchproducts();
+  }, []);
+
+  const renderProducts = () => {
+    return products.map((product: any, index: number) => (
+      <ProductCard
+        key={index}
+        title={product.title}
+        price={`₹${product.price}`}
+        oldPrice={`₹${(product.price * 1.2).toFixed(0)}`}
+        rating={(Math.random() * 2 + 3).toFixed(1)} 
+        image={{ uri: product.image }}
+      />
+    ));
+  };
+  if (loading) {
+    return (
+      <>
+        <ScrollView
+          style={styles.container}
+          showsVerticalScrollIndicator={false}
+        >
+          <Text style={styles.title}>India's Most Trusted</Text>
+          <Text style={styles.subtitle}>Health Supplement Brand</Text>
+          <View style={styles.productRow}>
+            {[1, 2, 3, 4].map((_, index) => (
+              <View key={index} style={styles.card}>
+                <View style={styles.loaderImage} />
+                <View style={styles.cardContent}>
+                  <View style={styles.loaderLineSmall} />
+                  <View style={styles.loaderLine} />
+                  <View style={styles.loaderLineSmall} />
+                  <View style={styles.loaderPriceRow}>
+                    <View style={styles.loaderPrice} />
+                    <View style={styles.loaderOldPrice} />
+                  </View>
+                </View>
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </>
+    );
+  }
+
   return (
     <>
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>    
-      {/* Title */}
-      <Text style={styles.title}>India's Most Trusted</Text>
-      <Text style={styles.subtitle}>Health Supplement Brand</Text>
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+        {/* Title */}
+        <Text style={styles.title}>India's Most Trusted</Text>
+        <Text style={styles.subtitle}>Health Supplement Brand</Text>
 
-      {/* Badges */}
-      <View style={styles.badgeRow}>
-        <Badge title="4L+" subtitle="Happy Customers" />
-        <Badge title="US FDA" subtitle="Approved" />
-        <Badge title="100+" subtitle="Clinical Studies" />
-        <Badge title="FSSAI" subtitle="Certified" />
-      </View>
+        <View style={styles.badgeRow}>
+          <Badge title="4L+" subtitle="Happy Customers" />
+          <Badge title="US FDA" subtitle="Approved" />
+          <Badge title="100+" subtitle="Clinical Studies" />
+          <Badge title="FSSAI" subtitle="Certified" />
+        </View>
 
-      {/* Section */}
-      <View style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>Best Seller</Text>
-        <Text style={styles.viewAll}>View All</Text>
-      </View>
- 
-      {/* Products */}
-      <View style={styles.productRow}>
-        <ProductCard
-          title="Plant Protein + Veg Collagen"
-          price="₹2494"
-          oldPrice="₹2895"
-          rating="4.5"
-          image={{ uri: 'https://via.placeholder.com/300' }}
-        />
-        <ProductCard
-          title="Skin: AcneClear - Powder"
-          price="₹1339"
-          oldPrice="₹1700"
-          rating="4.5"
-          image={{ uri: 'https://via.placeholder.com/300' }}
-        />
-        <ProductCard
-          title="Plant Protein + Veg Collagen"
-          price="₹2494"
-          oldPrice="₹2895"
-          rating="4.5"
-          image={{ uri: 'https://via.placeholder.com/300' }}
-        />
-        <ProductCard
-          title="Skin: AcneClear - Powder"
-          price="₹1339"
-          oldPrice="₹1700"
-          rating="4.5"
-          image={{ uri: 'https://via.placeholder.com/300' }}
-        />
-      </View>
-    </ScrollView>
+        <View style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>Best Seller</Text>
+          <Text style={styles.viewAll}>View All</Text>
+        </View>
+
+        <View style={styles.productRow}>
+          {renderProducts()}
+        </View>
+      </ScrollView>
     </>
   );
 };
@@ -92,7 +122,7 @@ const ProductCard = ({ title, price, oldPrice, rating, image }: any) => (
       <Text style={styles.productTitle}>{title}</Text>
 
       <View style={styles.ratingRow}>
-        <Text style={styles.star}>⭐</Text>
+        <Icon name={'star'} style={styles.star}></Icon>
         <Text>{rating}</Text>
       </View>
 
@@ -168,17 +198,17 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  viewAll:{
+  viewAll: {
     fontSize: wp('3.5%'),
     textDecorationLine: 'underline',
-    cursor: 'pointer'
+    cursor: 'pointer',
   },
 
   productRow: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    gap: wp('4%'),
+    gap: wp('3%'),
   },
 
   card: {
@@ -235,4 +265,44 @@ const styles = StyleSheet.create({
     color: '#999',
     fontSize: wp('3%'),
   },
+  loaderImage: {
+    width: '100%',
+    height: hp('20%'),
+    backgroundColor: '#E5E5E5',
+    },
+    
+    loaderLine: {
+    height: hp('1.8%'),
+    backgroundColor: '#E5E5E5',
+    marginBottom: hp('1%'),
+    borderRadius: 4,
+    },
+    
+    loaderLineSmall: {
+    height: hp('1.2%'),
+    width: '40%',
+    backgroundColor: '#E5E5E5',
+    marginBottom: hp('1%'),
+    borderRadius: 4,
+    },
+    
+    loaderPriceRow: {
+    flexDirection: 'row',
+    gap: wp('2%'),
+    },
+    
+    loaderPrice: {
+    width: '30%',
+    height: hp('1.8%'),
+    backgroundColor: '#E5E5E5',
+    borderRadius: 4,
+    },
+    
+    loaderOldPrice: {
+    width: '25%',
+    height: hp('1.6%'),
+    backgroundColor: '#E5E5E5',
+    borderRadius: 4,
+    },
+    
 });
